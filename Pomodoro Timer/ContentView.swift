@@ -8,14 +8,28 @@
 import SwiftUI
 import Foundation
 
-func secondsToMinutesSeconds(_ seconds: Int) -> (Int, Int) {
-    return ((seconds % 3600) / 60, (seconds % 3600) % 60)
-}
+
 
 struct ContentView: View {
-    @State var countdownTimer = 25*60 // 25 minutes
+    @State var countdownTimer = 1500// 25 minutes
     @State var timerRunning = false
     @State var brakeTime = false
+    
+    func convertToDoubleDigits(time: Int) -> String {
+        var returnValue = "\(time)"
+        if time < 10 {
+            returnValue = "0" + returnValue
+        }
+        
+        return returnValue
+    }
+    
+    func secondsToMinutesSeconds(seconds: Int) -> String {
+        let min = convertToDoubleDigits(time: (seconds % 3600) / 60)
+        let sec = convertToDoubleDigits(time: (seconds % 3600) % 60)
+    
+        return "\(min):\(sec)"
+    }
     
     let timer = Timer.publish(
         every: 1,
@@ -25,11 +39,15 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            Color.black.ignoresSafeArea()
             if timerRunning && !brakeTime {Color.red.ignoresSafeArea()}
             if timerRunning && brakeTime {Color.green.ignoresSafeArea()}
             
+            
             VStack(spacing:30) {
-                Text("\(countdownTimer)")
+                let displayed_time = secondsToMinutesSeconds(seconds: countdownTimer)
+                
+                Text("\(displayed_time)")
                     .padding()
                     .onReceive(timer) { _ in
                         if countdownTimer > 0 && timerRunning {
@@ -41,38 +59,42 @@ struct ContentView: View {
                             countdownTimer -= 1
                         }
                         if brakeTime && countdownTimer == 0 {
-                            timerRunning = false
                             brakeTime = false
+                            countdownTimer = 1500
                         }
                     }
                     .font(.system(size: 80, weight: .bold))
                     .opacity(0.8)
                     .background(Color.white)
-                    .cornerRadius(20)
+                    .cornerRadius(10)
+//                    .frame(width: 100)
                 
                 HStack(spacing:30) {
-                    Button("Start") {
-                        timerRunning = true
+                    if !timerRunning {
+                        Button("Start") {
+                            timerRunning = true
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(4)
+                    } else {
+                        Button("Pause") {
+                            timerRunning = false
+                        }
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(4)
                     }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    
-                    Button("Pause") {
+
+                    Button("Reset") {
+                        countdownTimer = 1500
                         timerRunning = false
                     }
                     .foregroundColor(.red)
                     .padding()
                     .background(Color.white)
-                    .cornerRadius(10)
-                    
-                    Button("Reset") {
-                        countdownTimer = 5
-                    }
-                    .foregroundColor(.red)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
+                    .cornerRadius(4)
                 }
             }
         }
