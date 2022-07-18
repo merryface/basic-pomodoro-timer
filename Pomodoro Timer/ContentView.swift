@@ -108,8 +108,22 @@ struct ContentView: View {
                     Button("Reset") {
                         countdownTimer = 1500
                         timerRunning = false
+                        brakeTime = false
                     }
                     .foregroundColor(.red)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(4)
+                }
+                
+                VStack(spacing: 10) {
+                    Button("Break Early") {
+                        playAudio()
+                        brakeTime = true
+                        countdownTimer = 301 // 5 minutes
+                        countdownTimer -= 1
+                    }
+                    .foregroundColor(.black)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(4)
