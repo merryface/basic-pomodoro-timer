@@ -24,51 +24,56 @@ struct ContentView: View {
     ).autoconnect()
     
     var body: some View {
-        VStack(spacing:30) {
-            Text("\(countdownTimer)")
-                .padding()
-                .onReceive(timer) { _ in
-                    if countdownTimer > 0 && timerRunning {
-                        countdownTimer -= 1
+        ZStack {
+            if timerRunning && !brakeTime {Color.red.ignoresSafeArea()}
+            if timerRunning && brakeTime {Color.green.ignoresSafeArea()}
+            
+            VStack(spacing:30) {
+                Text("\(countdownTimer)")
+                    .padding()
+                    .onReceive(timer) { _ in
+                        if countdownTimer > 0 && timerRunning {
+                            countdownTimer -= 1
+                        }
+                        if !brakeTime && countdownTimer == 0 {
+                            brakeTime = true
+                            countdownTimer = 301 // 5 minutes
+                            countdownTimer -= 1
+                        }
+                        if brakeTime && countdownTimer == 0 {
+                            timerRunning = false
+                            brakeTime = false
+                        }
                     }
-                    if !brakeTime && countdownTimer == 0 {
-                        brakeTime = true
-                        countdownTimer = 301 // 5 minutes
-                        countdownTimer -= 1
+                    .font(.system(size: 80, weight: .bold))
+                    .opacity(0.8)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                
+                HStack(spacing:30) {
+                    Button("Start") {
+                        timerRunning = true
                     }
-                    if brakeTime && countdownTimer == 0 {
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    
+                    Button("Pause") {
                         timerRunning = false
-                        brakeTime = false
                     }
-                }
-                .font(.system(size: 80, weight: .bold))
-                .opacity(0.8)
-            
-            HStack(spacing:30) {
-                Button("Start") {
-                    timerRunning = true
-                }
-                
-                Button("Pause") {
-                    timerRunning = false
-                }.foregroundColor(.red)
-                
-                Button("Reset") {
-                    countdownTimer = 5
-                }.foregroundColor(.red)
-            }
-            
-            HStack(spacing: 30) {
-                Button("Reduce") {
-                    if countdownTimer > 0 {
-                        countdownTimer -= 1
+                    .foregroundColor(.red)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    
+                    Button("Reset") {
+                        countdownTimer = 5
                     }
+                    .foregroundColor(.red)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
                 }
-                
-                Button("Increase") {
-                    countdownTimer += 1
-                }
-
             }
         }
     }
