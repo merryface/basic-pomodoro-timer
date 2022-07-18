@@ -78,7 +78,7 @@ struct ContentView: View {
                         if brakeTime && countdownTimer == 0 {
                             playAudio()
                             brakeTime = false
-                            countdownTimer = 1501
+                            countdownTimer = 1500
                         }
                     }
                     .font(.system(size: 80, weight: .bold))
@@ -91,6 +91,7 @@ struct ContentView: View {
                     if !timerRunning {
                         Button("Start") {
                             timerRunning = true
+                            UIApplication.shared.isIdleTimerDisabled = true
                         }
                         .padding()
                         .background(Color.white)
@@ -109,6 +110,7 @@ struct ContentView: View {
                         countdownTimer = 1500
                         timerRunning = false
                         brakeTime = false
+                        UIApplication.shared.isIdleTimerDisabled = false
                     }
                     .foregroundColor(.red)
                     .padding()
