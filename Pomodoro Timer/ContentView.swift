@@ -7,13 +7,29 @@
 
 import SwiftUI
 import Foundation
+import AVFoundation
+
 
 
 
 struct ContentView: View {
-    @State var countdownTimer = 1500// 25 minutes
+    @State var countdownTimer = 1500 // 25 minutes
     @State var timerRunning = false
     @State var brakeTime = false
+    @State var player: AVAudioPlayer?
+    
+    func playAudio() -> Void {
+        let pathToSound = Bundle.main.path(forResource: "mixkit-sci-fi-confirmation-914", ofType: "wav")!
+        let url = URL(fileURLWithPath: pathToSound)
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        }
+        catch {
+            print(error)
+        }
+    }
     
     func convertToDoubleDigits(time: Int) -> String {
         var returnValue = "\(time)"
@@ -54,13 +70,15 @@ struct ContentView: View {
                             countdownTimer -= 1
                         }
                         if !brakeTime && countdownTimer == 0 {
+                            playAudio()
                             brakeTime = true
                             countdownTimer = 301 // 5 minutes
                             countdownTimer -= 1
                         }
                         if brakeTime && countdownTimer == 0 {
+                            playAudio()
                             brakeTime = false
-                            countdownTimer = 1500
+                            countdownTimer = 1501
                         }
                     }
                     .font(.system(size: 80, weight: .bold))

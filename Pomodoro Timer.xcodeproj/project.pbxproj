@@ -16,6 +16,7 @@
 		3A17BF5228847CD2009C975E /* Pomodoro_TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A17BF5128847CD2009C975E /* Pomodoro_TimerTests.swift */; };
 		3A17BF5D28847CD2009C975E /* Pomodoro_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A17BF5C28847CD2009C975E /* Pomodoro_TimerUITests.swift */; };
 		3A4D55C52885C02800A47DAE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D55C42885C02800A47DAE /* README.md */; };
+		3A4D55C72885C98200A47DAE /* mixkit-sci-fi-confirmation-914.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D55C62885C98100A47DAE /* mixkit-sci-fi-confirmation-914.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		3A17BF5C28847CD2009C975E /* Pomodoro_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro_TimerUITests.swift; sourceTree = "<group>"; };
 		3A17BF5E28847CD2009C975E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A4D55C42885C02800A47DAE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A4D55C62885C98100A47DAE /* mixkit-sci-fi-confirmation-914.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "mixkit-sci-fi-confirmation-914.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		3A17BF3928847CCB009C975E /* Pomodoro Timer */ = {
 			isa = PBXGroup;
 			children = (
+				3A4D55C62885C98100A47DAE /* mixkit-sci-fi-confirmation-914.wav */,
 				3A17BF3A28847CCB009C975E /* AppDelegate.swift */,
 				3A17BF3C28847CCB009C975E /* SceneDelegate.swift */,
 				3A17BF3E28847CCB009C975E /* ContentView.swift */,
@@ -244,6 +247,7 @@
 			files = (
 				3A17BF4728847CD2009C975E /* LaunchScreen.storyboard in Resources */,
 				3A17BF4428847CD2009C975E /* Preview Assets.xcassets in Resources */,
+				3A4D55C72885C98200A47DAE /* mixkit-sci-fi-confirmation-914.wav in Resources */,
 				3A4D55C52885C02800A47DAE /* README.md in Resources */,
 				3A17BF4128847CD2009C975E /* Assets.xcassets in Resources */,
 			);
